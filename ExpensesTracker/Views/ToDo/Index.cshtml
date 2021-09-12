@@ -1,0 +1,55 @@
+﻿@model IEnumerable<ExpensesTracker.Models.ToDo>
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Tasks List</h2>
+        </div>
+        <div class="col-6 text-right">
+            <a asp-controller="ToDo" asp-action="Create" class="btn btn-primary">Create new Task</a>
+        </div>
+    </div>
+    <br />
+
+    @if (Model.Count() > 0)
+    {
+        <form>
+            <table class="table table-bordered table-striped" style="width: 100%">
+                <thead>
+                    <tr>
+                        <th>
+                            To Do Task
+                        </th>
+                        <th>
+                            Done
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td width="80%">@item.ToDoItem</td>
+                            <td width="20%">
+                                @if (item.IsDone)
+                                {
+                                    <input type="checkbox" asp-for="item.IsDone" value="" checked />
+                                }
+                                else
+                                {
+                                    <input type="checkbox" name="name" value="" />
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </form>
+    }
+    else
+    {
+        <p>No tasks to do yet.</p>
+    }
+
+
+</div>

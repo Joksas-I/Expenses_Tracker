@@ -1,0 +1,63 @@
+﻿@model IEnumerable<ExpensesTracker.Models.Expense>
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Expenses List</h2>
+        </div>
+        <div class="col-6 text-right">
+            <a asp-controller="Expenses" asp-action="Create" class="btn btn-primary">Create new Item</a>
+        </div>
+    </div>
+    <br />
+
+    @if (Model.Count() > 0)
+    {
+        <table class="table table-bordered table-striped" style="width: 100%">
+            <thead>
+                <tr>
+                    <th>
+                        Item Purchased
+                    </th>
+                    <th class="text-center">
+                        Amount Spent
+                    </th>
+                    <th class="text-center">
+                        Update
+                    </th>
+                    <th class="text-center">
+                        Delete
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var expense in Model)
+                {
+                    <tr>
+                        <td width="35%">@expense.PurchasedItem</td>
+                        <td width="15%" class="text-center">@expense.AmountSpent€</td>
+                        <td width="15%" class="text-center">
+                            <a asp-controller="Expenses" asp-action="Update" asp-route-Id="@expense.Id" class="btn btn-success">Update</a>
+                        </td>
+                        <td width="15%" class="text-center">
+                            <a asp-controller="Expenses" asp-action="Delete" asp-route-Id="@expense.Id" class="btn btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+            <thead>
+                <tr>
+                    <td class="text-right">Total Amount:</td>
+                    <td>Total Spendings</td>
+                </tr>
+            </thead>
+            
+        </table>
+    }
+    else
+    {
+        <p>No expenses yet.</p>
+    }
+
+
+</div>
